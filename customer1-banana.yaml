@@ -1,10 +1,10 @@
 apiVersion: fruit.fruit-provider.allianz.io/v1alpha1
-kind: Apple
+kind: Banana
 metadata:
-  name: customer1-apple
+  name: customer1-banana
 spec:
   forProvider:
-    color: green
+    color: yellow
   writeConnectionSecretToRef:
-    name: customer1-apple-secret
+    name: customer1-banana-secret
     namespace: default
