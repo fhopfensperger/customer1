@@ -8,3 +8,9 @@ spec:
   writeConnectionSecretToRef:
     name: customer1-banana-secret
     namespace: default
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: default
+  name: customer1-banana-secret
