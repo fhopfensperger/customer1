@@ -16,5 +16,5 @@ metadata:
   namespace: customer1
   name: customer1-banana-secret
   annotations:
-    argocd.argoproj.io/show-secret-value: "false"
+    argocd.argoproj.io/show-secret-value: "true"
 type: connection.crossplane.io/v1alpha1
