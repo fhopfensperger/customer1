@@ -2,9 +2,10 @@
 # kind: Apple
 # metadata:
 #   name: customer1-apple
+#   namespace: customer1
 # spec:
 #   forProvider:
 #     color: green
 #   writeConnectionSecretToRef:
 #     name: customer1-apple-secret
-#     namespace: default
+#     namespace: customer1

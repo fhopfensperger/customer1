@@ -2,15 +2,16 @@ apiVersion: fruit.fruit-provider.allianz.io/v1alpha1
 kind: Banana
 metadata:
   name: customer1-banana
+  namespace: customer1
 spec:
   forProvider:
     color: yellow
   writeConnectionSecretToRef:
     name: customer1-banana-secret
-    namespace: default
+    namespace: customer1
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  namespace: default
+  namespace: customer1
   name: customer1-banana-secret
