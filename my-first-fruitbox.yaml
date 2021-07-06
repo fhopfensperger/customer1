@@ -1,14 +1,10 @@
-apiVersion: allianz.io/v1alpha1
-kind: FruitBox
-metadata:
-  name: my-first-fruitbox
-  namespace: customer1
-spec:
-  parameters:
-    color: green
-#  compositionSelector:
-#    matchLabels:
-#      purpose: example
-#      provider: fruit
-  writeConnectionSecretToRef:
-    name: example-fruit-box
+#apiVersion: allianz.io/v1alpha1
+#kind: FruitBox
+#metadata:
+#  name: my-first-fruitbox
+#  namespace: customer1
+#spec:
+#  parameters:
+#    color: green
+#  writeConnectionSecretToRef:
+#    name: my-first-fruitbox-secret
