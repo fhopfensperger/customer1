@@ -5,7 +5,7 @@ metadata:
   namespace: customer1
 spec:
   forProvider:
-    color: yellow
+    color: blue
   writeConnectionSecretToRef:
     name: customer1-banana-secret
     namespace: customer1
