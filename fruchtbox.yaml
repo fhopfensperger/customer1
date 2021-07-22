@@ -3,6 +3,9 @@ kind: FruitBox
 metadata:
   name: my-first-fruitbox
   namespace: customer1
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+
 spec:
   parameters:
     color: green
