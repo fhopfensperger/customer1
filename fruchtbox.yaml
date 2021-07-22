@@ -1,8 +1,8 @@
-apiVersion: allianz.io/v1alpha1
-kind: FruitBox
-metadata:
-  name: my-first-fruitbox
-  namespace: customer1
-spec:
-  parameters:
-    color: green
+# apiVersion: allianz.io/v1alpha1
+# kind: FruitBox
+# metadata:
+#   name: my-first-fruitbox
+#   namespace: customer1
+# spec:
+#   parameters:
+#     color: green
