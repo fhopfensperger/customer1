@@ -2,10 +2,9 @@ apiVersion: allianz.io/v1alpha1
 kind: FruitBox
 metadata:
   name: my-first-fruitbox
-  namespace: customer2
+  namespace: customer1
 spec:
   parameters:
     color: green
   writeConnectionSecretToRef:
     name: my-first-fruitbox-secret
-    namespace: customer2
