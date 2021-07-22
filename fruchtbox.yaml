@@ -6,3 +6,6 @@ metadata:
 spec:
   parameters:
     color: green
+  writeConnectionSecretToRef:
+    name: my-first-fruitbox-secret
+    namespace: customer2
