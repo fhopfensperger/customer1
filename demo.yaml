@@ -2,7 +2,7 @@
 apiVersion: composite.demo.allianz.io/v1alpha1
 kind: Demo
 metadata:
-  name: claim-1  # Specify the name of the Demo composition
+  name: claim-2  # Specify the name of the Demo composition
   namespace: customer  # This namespace is fixed
 spec:
   applicationServer:
