@@ -1,0 +1,36 @@
+properties:
+  apiVersion:
+    default: aws.composite.scc.allianz.io/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    properties:
+      accountData:
+        description: 'AccountData: All customer specific creation data'
+        properties:
+          customerEnvironment:
+            description: 'CustomerEnvironment: The customer environment name. Possible values:   "dev" - Development   "prod" - Production   "test" - Staging.'
+            enum:
+              - dev
+              - prod
+              - test
+            type: string
+        required:
+          - customerEnvironment
+        type: object
+      providerConfigRef:
+        properties:
+          name:
+            type: string
+        type: object
+    required:
+      - accountData
+    title: aws.composite.scc.allianz.io.DedicatedAccount configuration options
+    type: object
+  kind:
+    default: DedicatedAccount
+    description: Kind for the resource
+    type: string
+  resources:
+    enum:
+      - aws.composite.scc.allianz.io.dedicatedaccount
