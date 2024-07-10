@@ -1,0 +1,77 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  description: Adds a FCP resource to your repo and application
+  name: deploy-fcp-resource
+  title: Add FCP resource
+spec:
+  output:
+    links:
+      - title: Go to PR
+        url: ${{steps.pullRequest.output.remoteUrl}}
+  owner: guest
+  parameters:
+    - dependencies:
+        resources:
+          oneOf:
+            - $yaml: resources/aws.composite.scc.allianz.io.dedicatedaccount.yaml
+            - $yaml: resources/composite.adp.allianz.io.ekscluster.yaml
+            - $yaml: resources/egress.composite.app-gateway.allianz.io.proxy.yaml
+      description: Select a FCP resource to add to your repository.
+      properties:
+        name:
+          description: name of this resource. This will be the name of K8s object.
+          type: string
+        path:
+          default: .
+          description: path in the repository where the resource will be saved.
+          type: string
+        resources:
+          enum:
+            - aws.composite.scc.allianz.io.dedicatedaccount
+            - composite.adp.allianz.io.ekscluster
+            - egress.composite.app-gateway.allianz.io.proxy
+          type: string
+      required:
+        - name
+      title: Choose FCP Resource
+    - properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+            allowedOwners:
+              - fhopfensperger
+      required:
+        - repoUrl
+      title: Choose your repository location
+  steps:
+    - action: roadiehq:utils:serialize:yaml
+      id: serialize
+      input:
+        data:
+          apiVersion: ${{ parameters.apiVersion }}
+          kind: ${{ parameters.kind }}
+          metadata:
+            name: ${{ parameters.name }}
+          spec: ${{ parameters.config }}
+      name: serialize
+    - action: roadiehq:utils:fs:write
+      id: write
+      input:
+        content: ${{ steps['serialize'].output.serialized }}
+        path: ${{ parameters.path }}/${{ parameters.name }}.yaml
+      name: write-to-file
+    - action: publish:github:pull-request
+      id: pullRequest
+      input:
+        branchName: ${{ parameters.name }}-${{ parameters.kind }}-${{ user.entity.metadata.name }}
+        description: Add ${{ parameters.kind }}
+        repoUrl: ${{ parameters.repoUrl }}
+        sourcePath: ./
+        title: Add ${{ parameters.kind }}
+      name: create-PR
+  type: service
