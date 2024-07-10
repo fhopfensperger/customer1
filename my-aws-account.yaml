@@ -1,0 +1,6 @@
+apiVersion: awsblueprints.io/v1alpha1
+metadata:
+  name: my-aws-account
+spec:
+  accountData:
+    customerEnvironment: dev
