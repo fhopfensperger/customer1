@@ -1,0 +1,163 @@
+properties:
+  apiVersion:
+    default: composite.adp.allianz.io/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    properties:
+      cluster:
+        properties:
+          deploymentLocation:
+            description: 'deploymentLocation: the Location where EKS will be deployed Possible values: "aws_ec1" -> AWS eu-central-1 (Frankfurt) "aws_ew3" -> AWS eu-west-3 (Paris) "aws_ase2" -> AWS ap-southeast-2 (Sydney)  -> "aws_ase4" AWS ap-southeast-4 (Melbourne) "aws_ase1" -> AWS ap-southeast-1 (Singapore) -> "aws_ase3" AWS ap-southeast-3 (Jakarta)'
+            enum:
+              - aws_ec1
+              - aws_ew3
+              - aws_ase2
+              - aws_ase1
+              - aws_ase4
+              - aws_ase3
+            type: string
+          name:
+            description: 'Name: the name of your cluster'
+            maxLength: 16
+            minLength: 4
+            pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+            type: string
+          serviceAdminEmail:
+            type: string
+          serviceParameters:
+            description: ServiceParameters holds the desired parameters for eks
+            properties:
+              advancedParameters:
+                description: 'AdvancedParameters : The Advanced parameters desired for eks.'
+                properties:
+                  assumeRoleFromAwsAccountId:
+                    type: string
+                  bringYourOwnAccount:
+                    enum:
+                      - "true"
+                      - "false"
+                    type: string
+                  customConfig:
+                    type: string
+                  eksPublicCustomerWhitelist:
+                    type: string
+                  noProxyWhitelist:
+                    type: string
+                  proxyHost:
+                    type: string
+                  proxyPort:
+                    type: string
+                type: object
+              automationRole:
+                description: 'AutomationRole: existing IAM role name from target AWS account to be used for automation'
+                type: string
+              availabilityZones:
+                enum:
+                  - "2"
+                  - "3"
+                type: string
+              awsAccountId:
+                description: 'AWSAccountId: the AWS account id of the account that you want to use for the EKS cluster.'
+                type: string
+              awsAccountName:
+                description: 'awsAccountName: name of the DedicatedAccount (currently aws.composite.scc.allianz.io/v1alpha1) object.'
+                type: string
+              az1HarmonizedSubnetId:
+                description: 'az1HarmonizedSubnetId: the harmonized subnet id of the Availability Zone 1, usually named xx_public_internal_1 in the aws console.'
+                type: string
+              az1PodSubnetId:
+                description: 'az1PodSubnetId: the pod subnet id of the Availability Zone 1, usually named xx_private_internal_1 in the aws console.'
+                type: string
+              az1WorkerSubnetId:
+                description: 'az1WorkerSubnetId: the worker subnet id of the Availability Zone 1, usually named xx_public_internal_1 in the aws console.'
+                type: string
+              az2HarmonizedSubnetId:
+                description: 'az2HarmonizedSubnetId: the harmonized subnet id of the Availability Zone 2, usually named xx_public_internal_2 in the aws console.'
+                type: string
+              az2PodSubnetId:
+                description: 'az2PodSubnetId: the pod subnet id of the Availability Zone 2, usually named xx_private_internal_2 in the aws console.'
+                type: string
+              az2WorkerSubnetId:
+                description: 'az2WorkerSubnetId: the worker subnet id of the Availability Zone 2, usually named xx_public_internal_2 in the aws console.'
+                type: string
+              az3HarmonizedSubnetId:
+                description: 'az3HarmonizedSubnetId: the harmonized subnet id of the Availability Zone 3, usually named xx_public_internal_3 in the aws console.'
+                type: string
+              az3PodSubnetId:
+                description: 'az3PodSubnetId: the pod subnet id of the Availability Zone 3, usually named xx_private_internal_3 in the aws console.'
+                type: string
+              az3WorkerSubnetId:
+                description: 'az3WorkerSubnetId: the worker subnet id of the Availability Zone 3, usually named xx_public_internal_3 in the aws console.'
+                type: string
+              dynatraceManagementZone:
+                description: 'DynatraceManagementZone: Your valid management zone of DynaTrace - e.g. mz-az-tech-crp_eks.'
+                type: string
+              dynatraceNetworkZone:
+                description: 'DynatraceNetworkZone: Your valid network zone of DynaTrace - e.g. az.aws.ec1-fcp-ssm.'
+                type: string
+              ingressSecurityGroupIds:
+                description: 'IngressSecurityGroupIds: the security group id of the ingress security group. Create a security group in the target AWS account and provide the id here. Comma separated if multiple Ids.'
+                type: string
+              instanceType:
+                description: 'InstanceType: the AWS EC2 instance type of the EKS worker nodes. Minimum recommended: "c5.xlarge"'
+                type: string
+              productionCluster:
+                enum:
+                  - "true"
+                  - "false"
+                type: string
+              r53HostedZoneDomainName:
+                description: 'R53HostedZoneDomainName: the domain name of the DNS hosted zone in the target AWS account.'
+                type: string
+              sshWorkerKeyPairName:
+                description: 'SSHWorkerKeyPairName: the name of the SSH key pair to be used for the EKS worker nodes. Must be created in advance. Can be created/imported in the AWS console under EC2 - Key Pair'
+                type: string
+              version:
+                description: 'Version: the version of the CRP 2.0 cluster. Example values: "8.0.0", "7.2.0'
+                type: string
+              workerSecurityGroupIds:
+                description: 'WorkerSecurityGroupIds: the security group id of the Worker node security group. Create a security group in the target AWS account and provide the id here. Comma separated if multiple Ids.'
+                type: string
+            required:
+              - availabilityZones
+              - az1HarmonizedSubnetId
+              - az1PodSubnetId
+              - az1WorkerSubnetId
+              - az2HarmonizedSubnetId
+              - az2PodSubnetId
+              - az2WorkerSubnetId
+              - productionCluster
+              - sshWorkerKeyPairName
+              - workerSecurityGroupIds
+              - ingressSecurityGroupIds
+              - r53HostedZoneDomainName
+              - version
+            type: object
+        required:
+          - name
+          - deploymentLocation
+          - serviceAdminEmail
+        type: object
+      providerConfigRef:
+        properties:
+          name:
+            type: string
+        type: object
+      team:
+        properties:
+          name:
+            description: 'Name: the name of your team'
+            type: string
+        type: object
+    required:
+      - cluster
+    title: composite.adp.allianz.io.EksCluster configuration options
+    type: object
+  kind:
+    default: EksCluster
+    description: Kind for the resource
+    type: string
+  resources:
+    enum:
+      - composite.adp.allianz.io.ekscluster
