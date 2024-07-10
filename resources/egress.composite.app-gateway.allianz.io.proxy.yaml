@@ -1,0 +1,70 @@
+properties:
+  apiVersion:
+    default: egress.composite.app-gateway.allianz.io/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    properties:
+      parameters:
+        properties:
+          allowedCidrs:
+            description: An array of CIDRs that are allowed to use the proxy.
+            items:
+              type: string
+            type: array
+          allowedDomains:
+            description: An array of URLs that are allowed. URLs are interpreted as regex.
+            items:
+              type: string
+            type: array
+          allowedPorts:
+            description: An array of target ports, that are allowed to be used with the proxy.
+            items:
+              type: string
+            type: array
+          keys:
+            description: An array of keys, that are allowed to authenticate to the proxy. Keys are hashed.
+            items:
+              type: string
+            type: array
+          region:
+            description: 'The aws region in which the egress instance is required: eu-central-1, eu-west-3, ap-southeast-1, ap-southeast-2, ap-southeast-3 or ap-southeast-4.'
+            enum:
+              - eu-central-1
+              - eu-west-3
+              - ap-southeast-1
+              - ap-southeast-2
+              - ap-southeast-3
+              - ap-southeast-4
+              - us-east-1
+            type: string
+          stage:
+            description: 'Desired stage: dev for non-prod, otherwise prod.'
+            enum:
+              - test
+              - dev
+              - prod
+            type: string
+        required:
+          - stage
+          - region
+          - allowedCidrs
+          - allowedDomains
+          - allowedPorts
+        type: object
+      providerConfigRef:
+        properties:
+          name:
+            type: string
+        type: object
+    required:
+      - parameters
+    title: egress.composite.app-gateway.allianz.io.Proxy configuration options
+    type: object
+  kind:
+    default: Proxy
+    description: Kind for the resource
+    type: string
+  resources:
+    enum:
+      - egress.composite.app-gateway.allianz.io.proxy
