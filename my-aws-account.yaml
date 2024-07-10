@@ -1,0 +1,5 @@
+metadata:
+  name: my-aws-account
+spec:
+  accountData:
+    customerEnvironment: dev
