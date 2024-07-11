@@ -1,0 +1,12 @@
+apiVersion: egress.composite.app-gateway.allianz.io/v1alpha1
+kind: Proxy
+metadata:
+  name: my-proxy
+spec:
+  parameters:
+    allowedCidrs: []
+    allowedDomains: []
+    allowedPorts: []
+    keys: []
+    region: eu-west-3
+    stage: dev
