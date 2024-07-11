@@ -1,0 +1,7 @@
+apiVersion: aws.composite.scc.allianz.io/v1alpha1
+kind: DedicatedAccount
+metadata:
+  name: my-aws-account
+spec:
+  accountData:
+    customerEnvironment: dev
